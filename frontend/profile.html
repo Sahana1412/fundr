@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator Dashboard - Fundr</title>
+  <meta name="description" content="Manage your crowdfunding campaigns, view donations, or create a new campaign card.">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet">
+  <style>
+    /* Custom tabs decoration */
+    .profile-tabs .nav-link {
+      color: var(--text-muted);
+      border: none;
+      font-weight: 600;
+      padding: 1rem 1.5rem;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .profile-tabs .nav-link.active {
+      color: var(--brand-primary);
+      background: transparent;
+      border-bottom-color: var(--brand-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <div id="navbar-placeholder" data-active="profile"></div>
+
+  <!-- Dashboard Overview Banner -->
+  <section class="py-4 bg-surface border-bottom border-color">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 py-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="profile-avatar-placeholder" id="dashboard-user-avatar">C</div>
+          <div>
+            <h1 class="h3 fw-bold text-main mb-0" id="dashboard-user-title">Creator Hub</h1>
+            <p class="text-muted mb-0 small">Create, edit, and monitor your personal fundraising campaigns.</p>
+          </div>
+        </div>
+        <!-- Stats summary pill -->
+        <div class="d-flex gap-3 bg-card p-3 rounded-4 border border-color shadow-sm">
+          <div class="px-2">
+            <span class="d-block text-muted small text-uppercase">My Campaigns</span>
+            <span class="h4 fw-extrabold text-main" id="user-total-campaigns-stat">0</span>
+          </div>
+          <div class="vr border-color"></div>
+          <div class="px-2">
+            <span class="d-block text-muted small text-uppercase">Total Raised</span>
+            <span class="h4 fw-extrabold text-success" id="user-total-raised-stat">₹0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Workspace tabs -->
+  <section class="py-4 bg-card border-bottom border-color">
+    <div class="container">
+      <ul class="nav profile-tabs" id="dashboard-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="campaigns-tab" data-bs-toggle="tab" data-bs-target="#tab-campaigns" type="button" role="tab"><i class="bi bi-grid-fill me-2"></i>My Campaigns</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="form-tab" data-bs-toggle="tab" data-bs-target="#tab-form" type="button" role="tab"><i class="bi bi-plus-circle-fill me-2"></i>Create Campaign</button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Main tabs workspace -->
+  <main class="py-5 bg-surface" style="min-height: 480px;">
+    <div class="container">
+      <div class="tab-content" id="dashboard-tab-content">
+        
+        <!-- TAB 1: MY CAMPAIGNS LISTING -->
+        <div class="tab-pane fade show active" id="tab-campaigns" role="tabpanel" aria-labelledby="campaigns-tab">
+          <div class="row g-4" id="user-campaigns-container">
+            <!-- Loader Skeletons -->
+            <div class="col-md-6 col-lg-4 skeleton-card"><div class="card-custom"><div class="skeleton skeleton-image"></div><div class="p-4"><div class="skeleton skeleton-text short mb-2"></div><div class="skeleton skeleton-text mb-4"></div></div></div></div>
+            <div class="col-md-6 col-lg-4 skeleton-card"><div class="card-custom"><div class="skeleton skeleton-image"></div><div class="p-4"><div class="skeleton skeleton-text short mb-2"></div><div class="skeleton skeleton-text mb-4"></div></div></div></div>
+          </div>
+        </div>
+
+        <!-- TAB 2: CREATE / EDIT FORM -->
+        <div class="tab-pane fade" id="tab-form" role="tabpanel" aria-labelledby="form-tab">
+          <div class="row justify-content-center">
+            <div class="col-xl-9">
+              <div class="card-custom p-4 p-md-5">
+                <!-- Header of form changes dynamically for edit mode -->
+                <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-color">
+                  <div>
+                    <h2 class="h3 fw-bold text-main mb-1" id="form-header-title">Start a New Campaign</h2>
+                    <p class="text-muted mb-0 small">Please provide genuine information to ensure trust from donors.</p>
+                  </div>
+                  <button type="button" class="btn btn-outline-danger btn-sm d-none" id="cancel-edit-btn">
+                    <i class="bi bi-x-circle me-1"></i> Cancel Edit
+                  </button>
+                </div>
+
+                <!-- Form -->
+                <form id="campaign-form" novalidate>
+                  <div class="row g-4">
+                    
+                    <!-- Section A: Organizer Info -->
+                    <div class="col-12"><h5 class="text-primary mb-0"><i class="bi bi-person me-2"></i>Organizer Details</h5></div>
+                    
+                    <div class="col-md-6">
+                      <label for="input-name" class="form-label small fw-bold text-muted">Full Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control form-control-custom" id="input-name" required placeholder="Enter your full name">
+                      <div class="invalid-feedback small">Name must be at least 3 characters.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="input-email" class="form-label small fw-bold text-muted">Email Address <span class="text-danger">*</span></label>
+                      <input type="email" class="form-control form-control-custom" id="input-email" required placeholder="Enter email address">
+                      <div class="invalid-feedback small">Provide a valid email.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="input-phone" class="form-label small fw-bold text-muted">Phone Number (Indian) <span class="text-danger">*</span></label>
+                      <input type="tel" class="form-control form-control-custom" id="input-phone" required placeholder="e.g. 9876543210">
+                      <div class="invalid-feedback small">Provide a valid 10-digit Indian phone number.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="input-location" class="form-label small fw-bold text-muted">Location / City <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control form-control-custom" id="input-location" required placeholder="e.g. Pune, Maharashtra">
+                      <div class="invalid-feedback small">Location is required.</div>
+                    </div>
+
+                    <!-- Section B: Campaign details -->
+                    <div class="col-12"><h5 class="text-primary mb-0 mt-3"><i class="bi bi-card-text me-2"></i>Campaign Specifications</h5></div>
+
+                    <div class="col-12">
+                      <label for="input-title" class="form-label small fw-bold text-muted">Campaign Title <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control form-control-custom" id="input-title" required placeholder="e.g. Medical emergency funds for surgery">
+                      <div class="invalid-feedback small">Title must be at least 3 characters.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="input-category" class="form-label small fw-bold text-muted">Category <span class="text-danger">*</span></label>
+                      <select class="form-select form-control-custom" id="input-category" required>
+                        <option value="" disabled selected>Select category...</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Education">Education</option>
+                        <option value="Startup">Startup</option>
+                        <option value="Emergency">Emergency</option>
+                        <option value="Community">Community</option>
+                        <option value="Animal Welfare">Animal Welfare</option>
+                        <option value="Environment">Environment</option>
+                      </select>
+                      <div class="invalid-feedback small">Please select a category.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="input-target" class="form-label small fw-bold text-muted">Target Funding Goal (₹) <span class="text-danger">*</span></label>
+                      <input type="number" class="form-control form-control-custom" id="input-target" min="1" required placeholder="Enter target amount in INR">
+                      <div class="invalid-feedback small">Goal must be a positive number.</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="input-desc" class="form-label small fw-bold text-muted">Campaign Description <span class="text-danger">*</span></label>
+                      <textarea class="form-control form-control-custom" id="input-desc" rows="5" required placeholder="Explain why you are raising funds. Who does it help? How will funds be used? (Minimum 30 characters)"></textarea>
+                      <div class="invalid-feedback small">Description must be at least 30 characters.</div>
+                    </div>
+
+                    <!-- Section C: Payments & files uploads -->
+                    <div class="col-12"><h5 class="text-primary mb-0 mt-3"><i class="bi bi-wallet2 me-2"></i>UPI Checkout & Verification</h5></div>
+
+                    <div class="col-md-6">
+                      <label for="input-upi" class="form-label small fw-bold text-muted">Your UPI ID (Optional)</label>
+                      <input type="text" class="form-control form-control-custom" id="input-upi" placeholder="e.g. name@upi">
+                      <div class="invalid-feedback small">Invalid UPI ID format (name@bank).</div>
+                      <div class="form-text text-muted" style="font-size: 0.75rem;">Allows donors to copy and paste UPI ID if QR is not scanning.</div>
+                    </div>
+
+                    <!-- File Drag & Drops -->
+                    <!-- 1. Profile Picture -->
+                    <div class="col-12 col-md-4">
+                      <label class="form-label small fw-bold text-muted d-block">Profile Image <span class="text-danger">*</span></label>
+                      <div class="upload-drag-area" id="drag-profile-img">
+                        <i class="bi bi-image fs-3 text-muted"></i>
+                        <p class="small text-muted mt-2 mb-0">Drag profile photo or click</p>
+                        <input type="file" id="file-profile-img" class="d-none" accept=".png, .jpg, .jpeg">
+                      </div>
+                      <div class="invalid-feedback small d-none" id="error-profile-img">Profile photo is required (max 2MB, JPG/PNG).</div>
+                      <img id="preview-profile-img" class="upload-preview d-none" alt="Profile preview">
+                    </div>
+
+                    <!-- 2. UPI QR -->
+                    <div class="col-12 col-md-4">
+                      <label class="form-label small fw-bold text-muted d-block">UPI QR Code (Optional)</label>
+                      <div class="upload-drag-area" id="drag-qr-img">
+                        <i class="bi bi-qr-code fs-3 text-muted"></i>
+                        <p class="small text-muted mt-2 mb-0">Drag UPI QR photo or click</p>
+                        <input type="file" id="file-qr-img" class="d-none" accept=".png, .jpg, .jpeg">
+                      </div>
+                      <div class="invalid-feedback small d-none" id="error-qr-img">Only PNG/JPG/JPEG under 2MB.</div>
+                      <img id="preview-qr-img" class="upload-preview d-none" alt="QR preview">
+                    </div>
+
+                    <!-- 3. Government ID -->
+                    <div class="col-12 col-md-4">
+                      <label class="form-label small fw-bold text-muted d-block">Government ID (Optional)</label>
+                      <div class="upload-drag-area" id="drag-id-img">
+                        <i class="bi bi-file-earmark-medical fs-3 text-muted"></i>
+                        <p class="small text-muted mt-2 mb-0">Drag Aadhaar/Pan card or click</p>
+                        <input type="file" id="file-id-img" class="d-none" accept=".png, .jpg, .jpeg">
+                      </div>
+                      <div class="invalid-feedback small d-none" id="error-id-img">Only PNG/JPG/JPEG under 2MB.</div>
+                      <img id="preview-id-img" class="upload-preview d-none" alt="ID preview">
+                    </div>
+
+                    <!-- Confirmation Checkbox -->
+                    <div class="col-12 mt-4">
+                      <div class="form-check p-3 bg-surface rounded-3 border border-color">
+                        <input class="form-check-input ms-0 me-2" type="checkbox" value="" id="confirm-terms" required>
+                        <label class="form-check-label small text-main" for="confirm-terms">
+                          I confirm that the details provided above are correct, files are genuine, and I will be held legally responsible for any false statements or fraudulent activities on this campaign.
+                        </label>
+                        <div class="invalid-feedback small mt-2">You must confirm to proceed.</div>
+                      </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="col-12 mt-4">
+                      <button type="submit" class="btn btn-primary-custom w-100 py-3 text-uppercase font-weight-bold" id="submit-form-btn">
+                        Publish Campaign <i class="bi bi-cloud-arrow-up ms-2"></i>
+                      </button>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content card-custom border-0 p-3 shadow-lg" style="background: var(--bg-card);">
+        <div class="modal-body text-center">
+          <div class="text-danger fs-1 mb-3"><i class="bi bi-exclamation-octagon-fill"></i></div>
+          <h4 class="text-main fw-bold">Delete Campaign?</h4>
+          <p class="text-muted small">Are you sure you want to delete this campaign? This action is permanent. All logged donation history will be deleted from our servers.</p>
+        </div>
+        <div class="modal-footer border-0 d-flex gap-2">
+          <button type="button" class="btn btn-outline-custom flex-grow-1" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger flex-grow-1" id="confirm-delete-btn">Delete Permanently</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modular Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Bootstrap Bundle with Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Shared Client Script -->
+  <script src="js/main.js"></script>
+  <!-- Profile Dashboard Script -->
+  <script src="js/profile.js"></script>
+</body>
+</html>
