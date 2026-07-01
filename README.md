@@ -4,7 +4,7 @@ Fundr is a production-quality, responsive, and commission-free crowdfunding web 
 
 ---
 
-## 🌟 Key Features
+##  Key Features
 
 - **0% Commission Direct-to-UPI Payments**: Bypasses conventional payment gateway processing schedules and fee structures.
 - **Dynamic Real-Time Filters & Instant Search**: Search campaigns by title, keywords, or location, filter by category tabs, and sort by goals or creation dates.
@@ -15,7 +15,7 @@ Fundr is a production-quality, responsive, and commission-free crowdfunding web 
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 fundr/
