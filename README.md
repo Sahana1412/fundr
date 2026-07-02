@@ -66,8 +66,6 @@ fundr/
 
 ##  Local Development Startup
 
-Follow these steps to run Fundr locally on your machine:
-
 ### 1. Prerequisites
 - [Node.js](https://nodejs.org/) installed (v18.0.0 or higher recommended).
 - [MongoDB](https://www.mongodb.com/try/download/community) installed and running locally, or a MongoDB Atlas account.
