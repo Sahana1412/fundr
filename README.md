@@ -95,33 +95,6 @@ The server will boot on port `5000` by default. Open `http://localhost:5000` in 
 
 ---
 
-##  MongoDB Atlas Setup Instructions
-
-1. **Sign Up**: Create a free account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
-2. **Create a Cluster**:
-   - Select the **FREE Shared Cluster** option.
-   - Choose your preferred cloud provider (e.g., AWS) and region nearest to you.
-   - Click **Create Cluster**.
-3. **Database Security Access**:
-   - In the left sidebar, navigate to **Database Access**.
-   - Click **Add New Database User**.
-   - Set authentication method to **Password**. Enter a username and secure password (e.g., `fundr-db-user`).
-   - Assign the user role **Read and write to any database**. Click **Add User**.
-4. **Network Access**:
-   - In the left sidebar, navigate to **Network Access**.
-   - Click **Add IP Address**.
-   - Click **Allow Access from Anywhere** (adds `0.0.0.0/0`, which is required for dynamic hosting platforms like Render to connect to the database). Click **Confirm**.
-5. **Get Connection String**:
-   - Return to the **Database** dashboard.
-   - Click **Connect** on your cluster.
-   - Select **Drivers** (Node.js).
-   - Copy the provided connection string. It will look like:
-     `mongodb+srv://<username>:<password>@cluster0.abcde.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
-   - Replace `<username>` and `<password>` in the connection string with the user credentials you created in step 3.
-   - Use this connection string in your `.env` file as `MONGODB_URI`.
-
----
-
 ## GitHub Repository Setup
 
 To host your project on GitHub:
