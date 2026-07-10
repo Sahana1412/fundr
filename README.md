@@ -65,7 +65,7 @@ fundr/
 
 ---
 
-##  Local Development Startup
+##  Local Development Startup - 
 
 ### 1. Prerequisites
 - [Node.js](https://nodejs.org/) installed (v18.0.0 or higher recommended).
