@@ -16,7 +16,7 @@ Fundr is a production-quality, responsive, and commission-free crowdfunding web 
 
 ---
 
-##  Project Structure
+##  Project Structure :
 
 ```
 fundr/
