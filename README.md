@@ -7,7 +7,7 @@ Fundr is a production-quality, responsive, and commission-free crowdfunding web 
 
 ## 🌟 Key Features
 
-- **0% Commission Direct-to-UPI Payments**: Bypasses conventional payment gateway processing schedules and fee structures.
+- **Commission Free Direct-to-UPI Payments**: Bypasses conventional payment gateway processing schedules and fee structures.
 - **Dynamic Real-Time Filters & Instant Search**: Search campaigns by title, keywords, or location, filter by category tabs, and sort by goals or creation dates.
 - **Interactive UPI Scan-and-Pay Section**: Automatically generates scanable UPI protocol links as QR codes if the creator doesn't upload a custom image.
 - **Creator Dashboard & CRUD controls**: Manage created campaigns, edit details, or delete campaigns using a secure session-based creator token stored in `localStorage` (no passwords required).
