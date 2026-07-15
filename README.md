@@ -156,32 +156,4 @@ To host your project on GitHub:
 
 ---
 
-## 🌐 Render Deployment Instructions
-
-Render makes it easy to deploy full-stack Node.js applications with static frontends.
-
-### Step 1: Link Github to Render
-1. Sign up/log in to [Render](https://render.com/).
-2. Connect your GitHub account.
-
-### Step 2: Create a Web Service
-1. Click **New +** at the top right and select **Web Service**.
-2. Select your repository from the list.
-3. Configure the following settings:
-   - **Name**: `fundr` (or any unique name)
-   - **Region**: Select region nearest to your target audience.
-   - **Branch**: `main`
-   - **Runtime**: `Node`
-   - **Build Command**: `npm install`
-   - **Start Command**: `npm start`
-   - **Plan**: Select the **Free** tier.
-
-### Step 3: Configure Environment Variables
-1. Scroll down or click the **Environment** tab in your web service page.
-2. Add the following variables:
-   - `NODE_ENV` = `production`
-   - `MONGODB_URI` = *[Your MongoDB Atlas Connection String]*
-   - `ALLOWED_ORIGIN` = *[Your Render App URL (e.g., `https://fundr.onrender.com`)]*
-3. Click **Save Changes**.
-
 Render will trigger a build, install all dependencies, bind to port `10000` (assigned automatically), and make the application public. Click the unique URL link displayed at the top of your Render dashboard to access your production platform!
