@@ -5,7 +5,7 @@ Fundr is a production-quality, responsive, and commission-free crowdfunding web 
 
 ---
 
-## 🌟 Key Features
+##  Key Features
 
 - **Commission Free Direct-to-UPI Payments**: Bypasses conventional payment gateway processing schedules and fee structures.
 - **Dynamic Real-Time Filters & Instant Search**: Search campaigns by title, keywords, or location, filter by category tabs, and sort by goals or creation dates.
@@ -16,7 +16,7 @@ Fundr is a production-quality, responsive, and commission-free crowdfunding web 
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 fundr/
@@ -65,7 +65,7 @@ fundr/
 
 ---
 
-## 🚀 Local Development Startup
+##  Local Development Startup
 
 Follow these steps to run Fundr locally on your machine:
 
@@ -97,7 +97,7 @@ The server will boot on port `5000` by default. Open `http://localhost:5000` in 
 
 ---
 
-## 🧱 MongoDB Atlas Setup Instructions
+##  MongoDB Atlas Setup Instructions
 
 1. **Sign Up**: Create a free account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 2. **Create a Cluster**:
@@ -124,7 +124,7 @@ The server will boot on port `5000` by default. Open `http://localhost:5000` in 
 
 ---
 
-## 🐱 GitHub Repository Setup
+##  GitHub Repository Setup
 
 To host your project on GitHub:
 
